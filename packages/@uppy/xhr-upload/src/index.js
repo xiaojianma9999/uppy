@@ -532,3 +532,5 @@ module.exports = class XHRUpload extends Plugin {
     this.uppy.removeUploader(this.handleUpload)
   }
 }
+
+module.exports.VERSION = '0.30.5'

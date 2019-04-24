@@ -70,3 +70,5 @@ module.exports = class GoogleDrive extends Plugin {
     return this.view.render(state)
   }
 }
+
+module.exports.VERSION = '0.30.5'

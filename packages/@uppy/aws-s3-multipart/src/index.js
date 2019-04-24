@@ -417,3 +417,5 @@ module.exports = class AwsS3Multipart extends Plugin {
     this.uppy.removeUploader(this.upload)
   }
 }
+
+module.exports.VERSION = '0.30.5'

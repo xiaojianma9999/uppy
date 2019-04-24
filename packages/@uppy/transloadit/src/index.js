@@ -82,10 +82,46 @@ module.exports = class Transloadit extends Plugin {
 
     this.client = new Client({
       service: this.opts.service,
+      client: this._getClientVersion(),
       errorReporting: this.opts.errorReporting
     })
     // Contains Assembly instances for in-progress Assemblies.
     this.activeAssemblies = {}
+  }
+
+  _getClientVersion () {
+    const list = [
+      `uppy-core:${this.uppy.constructor.VERSION}`,
+      `uppy-transloadit:${this.constructor.VERSION}`,
+      `uppy-tus:${Tus.VERSION}`,
+    ]
+
+    const xhrUpload = this.uppy.getPlugin('XHRUpload')
+    const awsS3 = this.uppy.getPlugin('AwsS3')
+    const awsS3Multipart = this.uppy.getPlugin('AwsS3Multipart')
+    const instagram = this.uppy.getPlugin('Instagram')
+    const dropbox = this.uppy.getPlugin('Dropbox')
+    const drive = this.uppy.getPlugin('GoogleDrive')
+
+    if (this.opts.importFromUploadURLs) {
+      list.push(
+        `uppy-xhr-upload:${xhrUpload.constructor.VERSION}`,
+        `uppy-aws-s3:${awsS3.constructor.VERSION}`,
+        `uppy-aws-s3-multipart:${awsS3Multipart.constructor.VERSION}`
+      )
+    }
+
+    if (instagram) {
+      list.push(`uppy-instagram:${instagram.constructor.VERSION}`)
+    }
+    if (dropbox) {
+      list.push(`uppy-dropbox:${dropbox.constructor.VERSION}`)
+    }
+    if (drive) {
+      list.push(`uppy-drive:${drive.constructor.VERSION}`)
+    }
+
+    return list.join(',')
   }
 
   /**
@@ -765,6 +801,7 @@ module.exports = class Transloadit extends Plugin {
   }
 }
 
+module.exports.VERSION = '0.30.5'
 module.exports.COMPANION = COMPANION
 module.exports.UPPY_SERVER = COMPANION
 module.exports.COMPANION_PATTERN = ALLOWED_COMPANION_PATTERN

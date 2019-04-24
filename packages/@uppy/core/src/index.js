@@ -1289,3 +1289,5 @@ module.exports = function (opts) {
 // Expose class constructor.
 module.exports.Uppy = Uppy
 module.exports.Plugin = Plugin
+
+module.exports.VERSION = '0.30.5'

@@ -235,3 +235,5 @@ module.exports = class AwsS3 extends Plugin {
     this.uppy.removePreProcessor(this.prepareUpload)
   }
 }
+
+module.exports.VERSION = '0.30.5'

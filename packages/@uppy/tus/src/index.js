@@ -479,3 +479,5 @@ module.exports = class Tus extends Plugin {
     }
   }
 }
+
+module.exports.VERSION = '0.30.5'
